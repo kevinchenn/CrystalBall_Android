@@ -10,6 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.Button;
+import android.widget.TextView;
+import android.R.*;
+
+import java.util.Random;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -18,11 +23,24 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
+        // Declare our View variables
+        final TextView answerLabel = (TextView) findViewById(R.id.answerLabel);
+        Button getAnswerButton = (Button) findViewById(R.id.getAnswerButton);
+
+        getAnswerButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                // The button was clicked, so update the answer label with an answer
+                String answer = "";
+
+                // Randomly select one of three answers: Yes, No, or Maybe
+                Random randomGenerator = new Random();
+                int randomNumber = randomGenerator.nextInt(3);
+                answer = Integer.toString(randomNumber);
+                // Update the label with our dynamic answer
+
+                answerLabel.setText(answer);
+            }
+        });
     }
 
 
@@ -44,22 +62,6 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
     }
 
 }
