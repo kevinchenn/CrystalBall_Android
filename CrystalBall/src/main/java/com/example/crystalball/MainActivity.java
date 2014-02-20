@@ -17,7 +17,7 @@ import android.R.*;
 import java.util.Random;
 
 public class MainActivity extends ActionBarActivity {
-
+    private CrystalBall mCrystalBall = new CrystalBall();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,16 +29,10 @@ public class MainActivity extends ActionBarActivity {
 
         getAnswerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                // The button was clicked, so update the answer label with an answer
-                String answer = "";
 
-                // Randomly select one of three answers: Yes, No, or Maybe
-                Random randomGenerator = new Random();
-                int randomNumber = randomGenerator.nextInt(3);
-                answer = Integer.toString(randomNumber);
                 // Update the label with our dynamic answer
 
-                answerLabel.setText(answer);
+                answerLabel.setText(mCrystalBall.getAnAnswer());
             }
         });
     }
