@@ -6,15 +6,29 @@
     tools:context="com.example.crystalball.MainActivity"
     tools:ignore="MergeRootFrame" >
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/ball01"
+        android:scaleType="fitXY" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
         android:id="@+id/answerLabel"
         android:layout_gravity="center"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:textSize="32sp" />
+        android:textSize="32sp"
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/white"
+        android:shadowColor="@android:color/white"
+        android:shadowRadius="10"
+        android:singleLine="false" />
 
     <Button
         android:layout_width="match_parent"
@@ -23,6 +37,12 @@
         android:id="@+id/getAnswerButton"
         android:layout_gravity="center"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="190dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="false"
+        android:textSize="24sp"
+        android:typeface="serif"
+        android:textStyle="bold|italic"
+        android:textColor="#3f0f7f" />
+
 </RelativeLayout>
