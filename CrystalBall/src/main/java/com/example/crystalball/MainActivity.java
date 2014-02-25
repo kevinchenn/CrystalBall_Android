@@ -1,6 +1,7 @@
 package com.example.crystalball;
 
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -35,6 +36,7 @@ public class MainActivity extends ActionBarActivity {
                 // Update the label with our dynamic answer
 
                 mAnswerLabel.setText(mCrystalBall.getAnAnswer());
+                playSound();
                 animateCrystalBall();
                 animateAnswer();
             }
@@ -57,6 +59,17 @@ public class MainActivity extends ActionBarActivity {
         fadeInAnimation.setFillAfter(true);
 
         mAnswerLabel.setAnimation(fadeInAnimation);
+    }
+
+    private void playSound() {
+        MediaPlayer player = MediaPlayer.create(this, R.raw.crystal_ball);
+        player.start();
+        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                mediaPlayer.release();
+            }
+        });
     }
 
     @Override
