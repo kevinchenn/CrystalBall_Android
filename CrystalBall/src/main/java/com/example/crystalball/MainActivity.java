@@ -1,44 +1,63 @@
 package com.example.crystalball;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
 import android.view.Window;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.R.*;
-
-import java.util.Random;
 
 public class MainActivity extends ActionBarActivity {
     private CrystalBall mCrystalBall = new CrystalBall();
+    private TextView mAnswerLabel;
+    private Button mGetAnswerButton;
+    private ImageView mCrystalBallImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        // Declare our View variables
-        final TextView answerLabel = (TextView) findViewById(R.id.answerLabel);
-        Button getAnswerButton = (Button) findViewById(R.id.getAnswerButton);
+        // Assigning View variables
+        mAnswerLabel = (TextView) findViewById(R.id.answerLabel);
+        mGetAnswerButton = (Button) findViewById(R.id.getAnswerButton);
+        mCrystalBallImage = (ImageView) findViewById(R.id.imageView);
 
-        getAnswerButton.setOnClickListener(new View.OnClickListener() {
+        mGetAnswerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
                 // Update the label with our dynamic answer
 
-                answerLabel.setText(mCrystalBall.getAnAnswer());
+                mAnswerLabel.setText(mCrystalBall.getAnAnswer());
+                animateCrystalBall();
+                animateAnswer();
             }
         });
     }
 
+    private void animateCrystalBall() {
+
+        mCrystalBallImage.setImageResource(R.drawable.ball_animation);
+        AnimationDrawable ballAnimation = (AnimationDrawable) mCrystalBallImage.getDrawable();
+        if (ballAnimation.isRunning()){
+            ballAnimation.stop();
+        }
+        ballAnimation.start();
+    }
+
+    private void animateAnswer() {
+        AlphaAnimation fadeInAnimation = new AlphaAnimation(0, 1);
+        fadeInAnimation.setDuration(1500);
+        fadeInAnimation.setFillAfter(true);
+
+        mAnswerLabel.setAnimation(fadeInAnimation);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
